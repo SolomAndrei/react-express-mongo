@@ -1,0 +1,34 @@
+name: CI/CD – Build and Deploy
+
+run-name: ${{ github.actor }} triggered a build 🚀
+
+on:
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [20.x]
+
+        steps:
+            - name: ⬇️ Checkout code
+              uses: actions/checkout@v4
+
+            - name: 🧰 Setup Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: 📦 Install dependencies
+              run: npm install
+
+            - name: 🛠️ Build project
+              run: npm run build
+
+            - name: ✅ Done
+              run: echo "Build complete. Ready for deploy."
