@@ -1,4 +1,4 @@
-name: CI/CD – Build and Deploy
+name: react-express-mongo
 
 run-name: ${{ github.actor }} triggered a build 🚀
 
